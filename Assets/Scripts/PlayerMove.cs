@@ -13,12 +13,16 @@ public class PlayerMove : MonoBehaviour
     [Header("Components")]
     public Rigidbody rb;
     public Transform planet;
+    [SerializeField] PlayerFuel playerFuel;
 
     [Header("Estados")]
     public bool isOrbit;
+    public bool outFuel = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        
         
     }
 
@@ -33,13 +37,18 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        if (isOrbit && planet != null)
+        if (isOrbit && planet != null && outFuel == false && playerFuel.inGame == true)
         {
             OrbitMove();
         }
-        else
+        else if(outFuel == false && playerFuel.inGame == true)
         {
             rb.linearVelocity = transform.up * speed;
+            rb.useGravity = true;
+        }
+        else
+        {
+            rb.useGravity = false;
         }
     }
 
