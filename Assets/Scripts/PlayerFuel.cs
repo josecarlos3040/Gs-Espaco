@@ -10,14 +10,7 @@ public class PlayerFuel : MonoBehaviour
     [Header("Components")]
     [SerializeField] PlayerMove playerMove;
     public Slider fuelSlider;
-    UIButtonsManager buttonsManager;
-
     
-
-    void Start()
-    {
-        
-    }
 
     private void FixedUpdate()
     {

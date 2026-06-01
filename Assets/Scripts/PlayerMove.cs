@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody rb;
     public Transform planet;
     [SerializeField] PlayerFuel playerFuel;
+    private PlayerControls controls;
 
     [Header("Estados")]
     public bool isOrbit;
@@ -22,14 +24,26 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
-        
+    }
+    private void Awake()
+    {
+        controls = new PlayerControls();
     }
 
+    void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.Disable();
+    }
     void Update()
     {
-       ExitOrbit();
+        ExitOrbit();
     }
+
     void FixedUpdate()
     {
         Move();
@@ -104,9 +118,9 @@ public class PlayerMove : MonoBehaviour
     
     }
 
-    void ExitOrbit()
+    public void ExitOrbit()
     {
-        if (Input.anyKey)
+        if (controls.Player.Go.WasPressedThisFrame())
         {
             rb.useGravity = true;
             isOrbit = false;
