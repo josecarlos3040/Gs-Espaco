@@ -1,13 +1,12 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 public class PlayerMove : MonoBehaviour
 {
     [Header("Player Move")]
     [SerializeField] float speed;
 
-    [SerializeField]float orbitRadius;
+    public float orbitRadius;
     [SerializeField] float orbitAngle;
 
 
@@ -42,6 +41,11 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         ExitOrbit();
+
+        if(outFuel == true)
+        {
+            rb.linearVelocity = Vector3.zero;
+        }
     }
 
     void FixedUpdate()
@@ -68,7 +72,7 @@ public class PlayerMove : MonoBehaviour
 
     void OrbitMove()
     {
-        if (isOrbit == true && planet != null)
+        if (isOrbit == true && planet != null && outFuel == false && playerFuel.inGame == true)
         {
             float angularSpeed = speed / orbitRadius;
 
@@ -91,9 +95,6 @@ public class PlayerMove : MonoBehaviour
             ).normalized;
 
             transform.up = tangent;
-
-
-
         }
     }
 
@@ -113,6 +114,12 @@ public class PlayerMove : MonoBehaviour
             isOrbit = true;
 
             rb.linearVelocity = Vector3.zero;
+            rb.useGravity = false;
+        }
+        if (other.gameObject.CompareTag("Planet2"))
+        {
+            playerFuel.gameOver = true;
+            playerFuel.fuelSlider.value = 0;
             rb.useGravity = false;
         }
     

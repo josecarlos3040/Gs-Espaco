@@ -18,6 +18,20 @@ public class PlayerFuel : MonoBehaviour
         {
             fuelSlider.value -= Time.deltaTime;
         }
+        if(fuelSlider.value <= 0)
+        {
+            playerMove.outFuel = true;
+            gameOver = true;
+        }
+        else
+        {
+            playerMove.outFuel = false;
+        }
+
+        if(playerMove.outFuel == true)
+        {
+            fuelSlider.value = 0;
+        }
     }
 
 
