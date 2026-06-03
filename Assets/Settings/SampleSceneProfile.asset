@@ -184,30 +184,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DepthOfField
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 30.23
+    m_Value: 60
   gaussianEnd:
     m_OverrideState: 0
-    m_Value: 30
+    m_Value: 31.3
   gaussianMaxRadius:
     m_OverrideState: 0
-    m_Value: 0.98
+    m_Value: 1.187
   highQualitySampling:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: 0
   focusDistance:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 3.62
   aperture:
     m_OverrideState: 0
     m_Value: 5.6
   focalLength:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 101
   bladeCount:
     m_OverrideState: 0

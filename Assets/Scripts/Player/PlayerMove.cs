@@ -1,10 +1,9 @@
 using UnityEngine;
-
-
 public class PlayerMove : MonoBehaviour
 {
     [Header("Player Move")]
-    [SerializeField] float speed;
+    [SerializeField] public float speed;
+    [SerializeField] float initialSpeed;
 
     public float orbitRadius;
     [SerializeField] float orbitAngle;
@@ -23,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     [Header("Estados")]
     public bool isOrbit;
     public bool outFuel = false;
+    public bool passedCloud = false;
 
     void Start()
     {
@@ -63,7 +63,12 @@ public class PlayerMove : MonoBehaviour
         {
             OrbitMove();
         }
-        else if(outFuel == false && playerFuel.inGame == true)
+        else if (outFuel == false && playerFuel.inGame == true && passedCloud == false)
+        {
+            rb.linearVelocity = (transform.up * initialSpeed) / 2;
+            rb.useGravity = true;
+        }
+        else if(outFuel == false && playerFuel.inGame == true && passedCloud == true)
         {
             rb.linearVelocity = transform.up * speed;
             rb.useGravity = true;
@@ -136,7 +141,11 @@ public class PlayerMove : MonoBehaviour
             playerFuel.fuelSlider.value = 0;
             rb.useGravity = false;
         }
-    
+
+        if (other.gameObject.CompareTag("InitialSpeed"))
+        {
+            passedCloud = true;
+        }
     }
 
     public void ExitOrbit()

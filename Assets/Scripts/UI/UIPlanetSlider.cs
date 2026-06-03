@@ -5,11 +5,11 @@ public class UIPlanetSlider : MonoBehaviour
 {
     [Header("Runtime and money")]
     [SerializeField] float planetCompletionTime;
-    [SerializeField] float moneyReward;
+    //[SerializeField] float moneyReward;
 
     [Header("Components")]
     [SerializeField] PlayerMove playerMove;
-    [SerializeField] PlayerUpgrades playerUpg;
+    [SerializeField] public PlayerUpgrades playerUpg;
     [SerializeField] Planet planet;
 
     [SerializeField] Slider planetSliderUI;
@@ -21,9 +21,10 @@ public class UIPlanetSlider : MonoBehaviour
         planetSliderUI.gameObject.SetActive(false);
     }
 
-    void Update()
+    public void Update()
     {
-        bool orbitingThisPlanet = playerMove.isOrbit & playerMove.planet == transform;
+        // Verifica se o player está em órbita e se o planeta atual do player é este planeta
+        bool orbitingThisPlanet = playerMove.isOrbit && playerMove.planet != null && playerMove.planet.GetComponentInParent<Planet>() == planet;
 
         if (planet.isScanned)
             return;
@@ -43,7 +44,9 @@ public class UIPlanetSlider : MonoBehaviour
             if (planetSliderUI.value <= 0)
             {
                 planet.isScanned = true;
-                playerUpg.money += moneyReward;
+                playerUpg.ReceivePlanetItem(planet);
+                //playerUpg.inventory[]
+                //playerUpg.money += moneyReward;
 
                 planetSliderUI.gameObject.SetActive(false);
             }
@@ -51,6 +54,7 @@ public class UIPlanetSlider : MonoBehaviour
         else
         {
             planetSliderUI.gameObject.SetActive(false);
+            initialized = false;
         }
     }
 
@@ -58,7 +62,8 @@ public class UIPlanetSlider : MonoBehaviour
     {
         planetCompletionTime = playerMove.orbitRadius * playerUpg.scanerTime;
 
-        moneyReward = planetCompletionTime * playerUpg.rewardMultiplier;
+        
+        //moneyReward = planetCompletionTime * playerUpg.rewardMultiplier;
 
         planetSliderUI.maxValue = planetCompletionTime;
         planetSliderUI.value = planetCompletionTime;

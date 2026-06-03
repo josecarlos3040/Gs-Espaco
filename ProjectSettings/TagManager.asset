@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Planet
   - Planet2
+  - InitialSpeed
   layers:
   - Default
   - TransparentFX
