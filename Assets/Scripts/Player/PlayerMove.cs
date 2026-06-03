@@ -13,6 +13,10 @@ public class PlayerMove : MonoBehaviour
     [Header("Components")]
     public Rigidbody rb;
     public Transform planet;
+    public Transform orbitCenter;
+
+    public Transform orbitPivot;
+
     [SerializeField] PlayerFuel playerFuel;
     private PlayerControls controls;
 
@@ -55,7 +59,7 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        if (isOrbit && planet != null && outFuel == false && playerFuel.inGame == true)
+        if (isOrbit && orbitCenter != null && !outFuel && playerFuel.inGame)
         {
             OrbitMove();
         }
@@ -72,50 +76,60 @@ public class PlayerMove : MonoBehaviour
 
     void OrbitMove()
     {
-        if (isOrbit == true && planet != null && outFuel == false && playerFuel.inGame == true)
-        {
             float angularSpeed = speed / orbitRadius;
 
             orbitAngle -= angularSpeed * Time.fixedDeltaTime;
 
+            // Orbit no plano YZ: usar eixo Z em vez de X
             Vector3 offset = new Vector3(
-                Mathf.Cos(orbitAngle),
+                0,
                 Mathf.Sin(orbitAngle),
-                0
+                Mathf.Cos(orbitAngle)
             ) * orbitRadius;
 
-            Vector3 newPos = planet.position + offset;
+            Vector3 newPos = orbitCenter.position + offset;
 
             rb.MovePosition(newPos);
 
+            // Tangente para movimento no plano YZ (derivada do offset em relação ao ângulo)
             Vector3 tangent = new Vector3(
-                Mathf.Sin(orbitAngle),
+                0,
                 -Mathf.Cos(orbitAngle),
-                0
+                Mathf.Sin(orbitAngle)
             ).normalized;
 
             transform.up = tangent;
-        }
+            //transform.rotation = Quaternion.LookRotation(Vector3.left, tangent);
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Planet"))
+        if (other.CompareTag("Planet"))
         {
-            planet = other.gameObject.transform;
+            Planet planetScript = other.GetComponentInParent<Planet>();
 
+            orbitCenter = planetScript.orbitCenter;
+            planet = other.transform;
 
-            Vector3 dir = transform.position - planet.position;
+            Vector3 surfacePoint = other.ClosestPoint(orbitPivot.position);
+
+            Vector3 dir = surfacePoint - orbitCenter.position;
 
             orbitRadius = dir.magnitude;
 
-            orbitAngle = Mathf.Atan2(dir.y, dir.x);
+            orbitAngle = Mathf.Atan2(dir.y, dir.z);
 
             isOrbit = true;
 
             rb.linearVelocity = Vector3.zero;
             rb.useGravity = false;
+
+            //rotaciona a nava
+            Vector3 euler = transform.eulerAngles;
+            transform.rotation = Quaternion.Euler(euler.x, 90f, euler.z);
         }
+
         if (other.gameObject.CompareTag("Planet2"))
         {
             playerFuel.gameOver = true;
@@ -133,7 +147,8 @@ public class PlayerMove : MonoBehaviour
             isOrbit = false;
 
             planet = null;
-  
+            orbitCenter = null;
+
         }
     }
 }

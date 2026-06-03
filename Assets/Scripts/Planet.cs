@@ -5,6 +5,7 @@ public class Planet : MonoBehaviour
     [SerializeField] UIPlanetSlider slider;
 
     public bool isScanned;
+    public Transform orbitCenter;
 
     void Start()
     {
