@@ -1,12 +1,17 @@
 using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
+using static Unity.Cinemachine.SplineAutoDolly;
 using static UnityEngine.Rendering.DebugUI;
 
 public class UIButtonsManager : MonoBehaviour
 {
     [SerializeField] public float moneyReward;
     [Header("Components")]
+    [SerializeField] BarrerShip barrerShip;
+    [SerializeField] BarrerCamera barrerCamera;
+    [SerializeField] Material earthSkybox;
+
     [SerializeField] PlayerFuel playerFuel;
     [SerializeField] PlayerMove playerMove;
     [SerializeField] PlayerUpgrades playerUpg;
@@ -16,6 +21,8 @@ public class UIButtonsManager : MonoBehaviour
     [SerializeField] GameObject particleLaunch;
 
     [SerializeField] TextMeshProUGUI moneyText;
+    [SerializeField] GameObject scanner;
+    [SerializeField] GameObject sellButton;
 
     [SerializeField] GameObject player;
     [SerializeField] InventoryUI inventoryUI;
@@ -28,6 +35,8 @@ public class UIButtonsManager : MonoBehaviour
     void Start()
     {
         dolly.AutomaticDolly.Enabled = false;
+
+        scanner.SetActive(false);
     }
 
     void Update()
@@ -70,6 +79,15 @@ public class UIButtonsManager : MonoBehaviour
         dolly.AutomaticDolly.Enabled = true;
         particleLaunch.SetActive(true);
         playerMove.passedCloud = false;
+
+        scanner.SetActive(true);
+        sellButton.SetActive(false);
+        var auto = dolly.AutomaticDolly;
+
+        if (auto.Method is SplineAutoDolly.FixedSpeed fixedSpeed)
+        {
+            fixedSpeed.Speed = 0.003f;
+        }
     } 
 
     public void GameOver()
@@ -77,11 +95,26 @@ public class UIButtonsManager : MonoBehaviour
         playerFuel.inGame = false;
         playerFuel.gameOver = false;
 
-        player.transform.position = new Vector3(0, -20, 0);
+        var auto = dolly.AutomaticDolly;
+        player.transform.position = new Vector3(-5.0314002f, 10.1700001f, 135.429993f);
         player.transform.rotation = Quaternion.identity;
+
+
+        barrerShip.propulsor.SetActive(true);
+        barrerShip.trail.SetActive(false);
+
+        barrerCamera.cameraSpace.SetActive(false);
+        barrerCamera.cameraDolly.SetActive(true);
+
         playerMove.rb.useGravity = true;
         playerMove.isOrbit = false;
         particleLaunch.SetActive(false);
+        scanner.SetActive(false);
+        sellButton.SetActive(true);
+        RenderSettings.skybox = earthSkybox;
+        
+        
+        //DynamicGI.UpdateEnvironment();
 
         playerMove.planet = null;
         playerMove.rb.linearVelocity = Vector3.zero;

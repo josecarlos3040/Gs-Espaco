@@ -55,6 +55,7 @@ public class PlayerMove : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        CheckBounds();
     }
 
     void Move()
@@ -147,7 +148,15 @@ public class PlayerMove : MonoBehaviour
             passedCloud = true;
         }
     }
-
+    void CheckBounds()
+    {
+        if (transform.position.z > 200f || transform.position.z < 55f)
+        {
+            playerFuel.gameOver = true;
+            playerFuel.fuelSlider.value = 0;
+            rb.useGravity = false;
+        }
+    }
     public void ExitOrbit()
     {
         if (controls.Player.Go.WasPressedThisFrame())

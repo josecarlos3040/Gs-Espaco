@@ -4,6 +4,7 @@ public class Planet : MonoBehaviour
 {
 
     [SerializeField] UIPlanetSlider slider;
+    public GameObject previewModel;
     public PlayerUpgrades upgrades;
     public Transform orbitCenter;
     public bool isScanned;

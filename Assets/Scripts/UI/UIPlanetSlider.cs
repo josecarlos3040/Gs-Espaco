@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class UIPlanetSlider : MonoBehaviour
 {
+
+    // ESSE CODIGO É RESPONSÁVEL POR GERENCIAR O SLIDER E O PREVIEW DE PROGRESSO DE SCAN DO PLANETA
     [Header("Runtime and money")]
     [SerializeField] float planetCompletionTime;
     //[SerializeField] float moneyReward;
@@ -14,11 +16,17 @@ public class UIPlanetSlider : MonoBehaviour
 
     [SerializeField] Slider planetSliderUI;
 
+    [SerializeField] RawImage planetPreviewUI;
+    [SerializeField] Transform previewRoot;
+
+    GameObject currentPreview;
+
     bool initialized;
 
     void Start()
     {
         planetSliderUI.gameObject.SetActive(false);
+        planetPreviewUI.gameObject.SetActive(false);
     }
 
     public void Update()
@@ -35,6 +43,9 @@ public class UIPlanetSlider : MonoBehaviour
             {
                 initialized = true;
                 SetSliderValue();
+
+                ShowPlanetPreview();
+                planetPreviewUI.gameObject.SetActive(true);
             }
 
             planetSliderUI.gameObject.SetActive(true);
@@ -49,11 +60,30 @@ public class UIPlanetSlider : MonoBehaviour
                 //playerUpg.money += moneyReward;
 
                 planetSliderUI.gameObject.SetActive(false);
+
+                planetSliderUI.gameObject.SetActive(false);
+                planetPreviewUI.gameObject.SetActive(false);
+
+                if (currentPreview != null)
+                {
+                    Destroy(currentPreview);
+                    currentPreview = null;
+                }
             }
         }
         else
         {
             planetSliderUI.gameObject.SetActive(false);
+            initialized = false;
+
+            planetSliderUI.gameObject.SetActive(false);
+            planetPreviewUI.gameObject.SetActive(false);
+
+            if (currentPreview != null)
+            {
+                Destroy(currentPreview);
+                currentPreview = null;
+            }
             initialized = false;
         }
     }
@@ -67,5 +97,32 @@ public class UIPlanetSlider : MonoBehaviour
 
         planetSliderUI.maxValue = planetCompletionTime;
         planetSliderUI.value = planetCompletionTime;
+    }
+
+    void ShowPlanetPreview()
+    {
+        if (currentPreview != null)
+            Destroy(currentPreview);
+
+        currentPreview = Instantiate(
+            planet.previewModel,
+            previewRoot.position,
+            Quaternion.identity
+        );
+
+        SetLayerRecursively(
+            currentPreview,
+            LayerMask.NameToLayer("PlanetPreview")
+        );
+    }
+
+    void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, layer);
+        }
     }
 }
