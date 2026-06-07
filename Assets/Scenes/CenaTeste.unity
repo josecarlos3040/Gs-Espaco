@@ -14842,10 +14842,10 @@ MonoBehaviour:
         z: 3.403219
       Rotation:
         value:
-          x: 0.54001874
+          x: 0.5400188
           y: 0.4564864
           z: 0.53889126
-          w: -0.45781666
+          w: -0.45781663
     - Position:
         x: -5.0314
         y: 25.02
@@ -30013,7 +30013,7 @@ MonoBehaviour:
   particleLaunch: {fileID: 682331863}
   moneyText: {fileID: 867634871}
   scanner: {fileID: 205317640}
-  cometSpawner: {fileID: 0}
+  cometSpawner: {fileID: 2080294554}
   sellButton: {fileID: 1306486303}
   player: {fileID: 1269768855}
   inventoryUI: {fileID: 1706087689}
@@ -31018,7 +31018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4032447649352344369, guid: ae8fec9efab8f174f911fee368c142da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 207.4
+      value: 203.7
       objectReference: {fileID: 0}
     - target: {fileID: 4032447649352344369, guid: ae8fec9efab8f174f911fee368c142da, type: 3}
       propertyPath: m_LocalPosition.z
