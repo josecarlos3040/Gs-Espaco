@@ -31,6 +31,16 @@ public class UIPlanetSlider : MonoBehaviour
 
     public void Update()
     {
+        if (planet.isScanned)
+            return;
+
+        if (playerMove.planet == null)
+            return;
+
+        Planet currentPlanet = playerMove.planet.GetComponentInParent<Planet>();
+
+        if (currentPlanet != planet)
+            return;
         // Verifica se o player está em órbita e se o planeta atual do player é este planeta
         bool orbitingThisPlanet = playerMove.isOrbit && playerMove.planet != null && playerMove.planet.GetComponentInParent<Planet>() == planet;
 
