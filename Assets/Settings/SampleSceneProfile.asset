@@ -65,13 +65,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.68670297, y: 0.7552217, z: 1, w: 0}
+    m_Value: {x: 0.2529368, y: 0.20719737, z: 1, w: 0.047834378}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.97523844, z: 0.83220375, w: -0.04151543}
+    m_Value: {x: 1, y: 0.9824273, z: 0.87963617, w: -0.04151543}
   highlights:
-    m_OverrideState: 0
-    m_Value: {x: 0.99937785, y: 1, z: 0.8536808, w: -0.004236898}
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.99335766, z: 0.89422965, w: 0.09696246}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DepthOfField
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 1
