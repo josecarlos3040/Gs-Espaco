@@ -22,10 +22,6 @@ public class CometSpawner : MonoBehaviour
 
     List<Vector3> spawnedPositions = new();
 
-    void Start()
-    {
-        SpawnComets();
-    }
 
     public void SpawnComets()
     {
