@@ -22,6 +22,7 @@ public class UIButtonsManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] GameObject scanner;
+    [SerializeField] CometSpawner cometSpawner;
     [SerializeField] GameObject sellButton;
 
     [SerializeField] GameObject player;
@@ -84,6 +85,8 @@ public class UIButtonsManager : MonoBehaviour
         sellButton.SetActive(false);
         var auto = dolly.AutomaticDolly;
 
+        cometSpawner.SpawnComets();
+
         if (auto.Method is SplineAutoDolly.FixedSpeed fixedSpeed)
         {
             fixedSpeed.Speed = 0.003f;
@@ -99,6 +102,7 @@ public class UIButtonsManager : MonoBehaviour
         player.transform.position = new Vector3(-5.0314002f, 10.1700001f, 135.429993f);
         player.transform.rotation = Quaternion.identity;
 
+        cometSpawner.DestroyAllComets();
 
         barrerShip.propulsor.SetActive(true);
         barrerShip.trail.SetActive(false);

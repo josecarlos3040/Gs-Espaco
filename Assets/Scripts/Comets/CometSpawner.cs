@@ -27,7 +27,7 @@ public class CometSpawner : MonoBehaviour
         SpawnComets();
     }
 
-    void SpawnComets()
+    public void SpawnComets()
     {
         int attempts = 0;
 
@@ -63,7 +63,7 @@ public class CometSpawner : MonoBehaviour
         }
     }
 
-    void DestroyAllComets()
+    public void DestroyAllComets()
     {
         foreach (Transform child in transform)
         {

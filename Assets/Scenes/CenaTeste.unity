@@ -30013,6 +30013,7 @@ MonoBehaviour:
   particleLaunch: {fileID: 682331863}
   moneyText: {fileID: 867634871}
   scanner: {fileID: 205317640}
+  cometSpawner: {fileID: 0}
   sellButton: {fileID: 1306486303}
   player: {fileID: 1269768855}
   inventoryUI: {fileID: 1706087689}
@@ -31060,8 +31061,8 @@ PrefabInstance:
       value: Asteroid 1
       objectReference: {fileID: 0}
     - target: {fileID: 7210267554884423352, guid: ae8fec9efab8f174f911fee368c142da, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_TagString
+      value: Planet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
