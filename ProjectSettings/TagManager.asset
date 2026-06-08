@@ -9,6 +9,7 @@ TagManager:
   - InitialSpeed
   - SpaceBarrer
   - Moon
+  - Satelite
   layers:
   - Default
   - TransparentFX

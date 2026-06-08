@@ -20,6 +20,8 @@ public class UIPlanetSlider : MonoBehaviour
     [SerializeField] RawImage planetPreviewUI;
     [SerializeField] Transform previewRoot;
 
+    Planet lastPlanet;
+
     GameObject currentPreview;
 
     bool initialized;
@@ -33,25 +35,38 @@ public class UIPlanetSlider : MonoBehaviour
     public void Update()
     {
         if (planet.isScanned)
+        {
+            HidePreview();
             return;
+        }
 
         if (playerMove.planet == null)
+        {
+            HidePreview();
             return;
+        }
 
         Planet currentPlanet = playerMove.planet.GetComponentInParent<Planet>();
 
         if (currentPlanet != planet)
+        {
             return;
+        }
         // Verifica se o player está em órbita e se o planeta atual do player é este planeta
         bool orbitingThisPlanet = playerMove.isOrbit && playerMove.planet != null && playerMove.planet.GetComponentInParent<Planet>() == planet;
 
-        if (planet.isScanned)
-            return;
-
         if (orbitingThisPlanet)
         {
+            if (currentPlanet != lastPlanet)
+            {
+                initialized = false;
+                lastPlanet = currentPlanet;
+            }
+
             if (!initialized)
             {
+                Debug.Log("RESETOU O SLIDER");
+
                 initialized = true;
                 SetSliderValue();
 
@@ -60,7 +75,7 @@ public class UIPlanetSlider : MonoBehaviour
             }
 
             planetSliderUI.gameObject.SetActive(true);
-
+            
             planetSliderUI.value = Mathf.Max(0, planetSliderUI.value - Time.deltaTime);
 
             if (planetSliderUI.value <= 0)
@@ -84,12 +99,15 @@ public class UIPlanetSlider : MonoBehaviour
                     else { return; }
 
                 }
-                planet.isScanned = true;
+                
                 if (planet.CompareTag("Moon"))
                 {
+
+                    HidePreview();
                     return;
                 }
-                else { playerUpg.ReceivePlanetItem(planet); }
+                else { playerUpg.ReceivePlanetItem(planet);
+                    planet.isScanned = true;}
                 
                 //playerUpg.inventory[]
                 //playerUpg.money += moneyReward;
@@ -104,22 +122,17 @@ public class UIPlanetSlider : MonoBehaviour
                     Destroy(currentPreview);
                     currentPreview = null;
                 }
+                planetSliderUI.gameObject.SetActive(false);
+                planetPreviewUI.gameObject.SetActive(false);
             }
         }
         else
         {
             planetSliderUI.gameObject.SetActive(false);
-            initialized = false;
-
-            planetSliderUI.gameObject.SetActive(false);
             planetPreviewUI.gameObject.SetActive(false);
+            HidePreview();
 
-            if (currentPreview != null)
-            {
-                Destroy(currentPreview);
-                currentPreview = null;
-            }
-            initialized = false;
+
         }
     }
 
@@ -136,19 +149,31 @@ public class UIPlanetSlider : MonoBehaviour
 
     void ShowPlanetPreview()
     {
+        planetSliderUI.value = planetSliderUI.maxValue;
         if (currentPreview != null)
             Destroy(currentPreview);
 
         currentPreview = Instantiate(
             planet.previewModel,
-            previewRoot.position,
-            Quaternion.identity
+            previewRoot
         );
+
+        currentPreview.transform.localPosition = Vector3.zero;
+        currentPreview.transform.localRotation = Quaternion.identity;
 
         SetLayerRecursively(
             currentPreview,
             LayerMask.NameToLayer("PlanetPreview")
         );
+
+        if (planet.CompareTag("Moon"))
+        {
+            currentPreview.transform.localPosition = new Vector3(0, 0, 20);
+        }
+        else
+        {
+            currentPreview.transform.localPosition = new Vector3(0, 0, -15);
+        }
     }
 
     void SetLayerRecursively(GameObject obj, int layer)
@@ -159,5 +184,16 @@ public class UIPlanetSlider : MonoBehaviour
         {
             SetLayerRecursively(child.gameObject, layer);
         }
+    }
+
+    void HidePreview()
+    {
+        if (currentPreview != null)
+        {
+            Destroy(currentPreview);
+            currentPreview = null;
+        }
+
+        initialized = false;
     }
 }

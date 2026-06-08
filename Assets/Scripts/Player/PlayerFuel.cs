@@ -7,6 +7,8 @@ public class PlayerFuel : MonoBehaviour
     [SerializeField] public bool inGame = false;
     [SerializeField] public bool gameOver;
 
+    [SerializeField] public bool inSateliteOrbit = false;
+
     [Header("Components")]
     [SerializeField] PlayerMove playerMove;
     public Slider fuelSlider;
@@ -33,6 +35,17 @@ public class PlayerFuel : MonoBehaviour
             fuelSlider.value = 0;
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Satelite"))
+        {
+            inSateliteOrbit = true;
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        inSateliteOrbit = false;
+    }
 
 }

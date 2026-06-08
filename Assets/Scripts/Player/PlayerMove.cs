@@ -14,6 +14,8 @@ public class PlayerMove : MonoBehaviour
     public Transform planet;
     public Transform orbitCenter;
 
+    public Transform orbitCenterSatel;
+
     public Transform orbitPivot;
 
     [SerializeField] PlayerFuel playerFuel;
@@ -100,7 +102,7 @@ public class PlayerMove : MonoBehaviour
                 Mathf.Sin(orbitAngle),
                 Mathf.Cos(orbitAngle)
             ) * orbitRadius;
-
+            
             Vector3 newPos = orbitCenter.position + offset;
 
             rb.MovePosition(newPos);
@@ -119,6 +121,31 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+        if (other.CompareTag("Satelite"))
+        {
+            Satelite sat = other.GetComponentInParent<Satelite>();
+
+            orbitCenter = sat.orbitCenter;
+            planet = other.transform;
+
+            Vector3 surfacePoint = other.ClosestPoint(orbitPivot.position);
+
+            Vector3 dir = surfacePoint - orbitCenter.position;
+
+            orbitRadius = dir.magnitude;
+
+            orbitAngle = Mathf.Atan2(dir.y, dir.z);
+
+            isOrbit = true;
+
+            rb.linearVelocity = Vector3.zero;
+            rb.useGravity = false;
+
+            Vector3 euler = transform.eulerAngles;
+            transform.rotation = Quaternion.Euler(euler.x, 90f, euler.z);
+        }
+
         if (other.CompareTag("Planet"))
         {
             Planet planetScript = other.GetComponentInParent<Planet>();

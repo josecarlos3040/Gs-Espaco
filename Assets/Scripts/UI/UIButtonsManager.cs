@@ -7,7 +7,11 @@ using static UnityEngine.Rendering.DebugUI;
 public class UIButtonsManager : MonoBehaviour
 {
     [SerializeField] public float moneyReward;
+    public int qtdDays = 0;
     [Header("Components")]
+    [SerializeField] TextMeshProUGUI textMeshDay;
+    [SerializeField] TextMeshProUGUI textInventory;
+
     [SerializeField] BarrerShip barrerShip;
     [SerializeField] BarrerCamera barrerCamera;
     [SerializeField] Material earthSkybox;
@@ -104,9 +108,13 @@ public class UIButtonsManager : MonoBehaviour
         {
             changeButton.SetActive(false);
         }
+
+        textInventory.text = "Storage: " + playerUpg.inventory.Count + "/"+ playerUpg.maxInventory;
     }
     public void StartGame()
     {
+        qtdDays++;
+        textMeshDay.text = "Day: " + qtdDays.ToString();
         playerFuel.inGame = true;
         dolly.AutomaticDolly.Enabled = true;
         particleLaunch.SetActive(true);
