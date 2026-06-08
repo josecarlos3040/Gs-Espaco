@@ -275,7 +275,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.54
+    m_Value: 0.42
   tintColor:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -305,7 +305,7 @@ MonoBehaviour:
     m_Value: 1
   startingPosition:
     m_OverrideState: 0
-    m_Value: 1.25
+    m_Value: 1
   scale:
     m_OverrideState: 0
     m_Value: 1.5
@@ -317,7 +317,7 @@ MonoBehaviour:
     m_Value: 0.387
   streaksOrientation:
     m_OverrideState: 0
-    m_Value: -1.41
+    m_Value: -10.83
   streaksThreshold:
     m_OverrideState: 0
     m_Value: 0.25
