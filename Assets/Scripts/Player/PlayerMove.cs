@@ -17,12 +17,18 @@ public class PlayerMove : MonoBehaviour
     public Transform orbitPivot;
 
     [SerializeField] PlayerFuel playerFuel;
+    [SerializeField] StoreManager storeManager;
+    [SerializeField] UIButtonsManager buttonsManager;
+
     private PlayerControls controls;
 
     [Header("Estados")]
     public bool isOrbit;
     public bool outFuel = false;
     public bool passedCloud = false;
+
+    public bool fuelMoonComplete = false;
+    public bool sellMoonComplete = false;
 
     void Start()
     {
@@ -143,9 +149,51 @@ public class PlayerMove : MonoBehaviour
             rb.useGravity = false;
         }
 
+        if (other.gameObject.CompareTag("Moon"))
+        {
+            Planet planetScript = other.GetComponentInParent<Planet>();
+
+            orbitCenter = planetScript.orbitCenter;
+            planet = other.transform;
+
+            Vector3 surfacePoint = other.ClosestPoint(orbitPivot.position);
+
+            Vector3 dir = surfacePoint - orbitCenter.position;
+
+            orbitRadius = dir.magnitude;
+
+            orbitAngle = Mathf.Atan2(dir.y, dir.z);
+
+            isOrbit = true;
+
+            rb.linearVelocity = Vector3.zero;
+            rb.useGravity = false;
+
+            //rotaciona a nava
+            Vector3 euler = transform.eulerAngles;
+            transform.rotation = Quaternion.Euler(euler.x, 90f, euler.z);
+
+            if (fuelMoonComplete)
+            {
+                playerFuel.fuelSlider.value = playerFuel.fuelSlider.maxValue;
+            }
+            if (sellMoonComplete)
+            {
+                buttonsManager.sellButton.SetActive(true);
+            }
+        }
+
         if (other.gameObject.CompareTag("InitialSpeed"))
         {
             passedCloud = true;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Moon"))
+        {
+            buttonsManager.sellButton.SetActive(false);
         }
     }
     void CheckBounds()

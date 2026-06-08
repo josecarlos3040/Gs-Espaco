@@ -23,7 +23,7 @@ public class UIButtonsManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] GameObject scanner;
     [SerializeField] CometSpawner cometSpawner;
-    [SerializeField] GameObject sellButton;
+    public GameObject sellButton;
 
     [SerializeField] GameObject player;
     [SerializeField] InventoryUI inventoryUI;

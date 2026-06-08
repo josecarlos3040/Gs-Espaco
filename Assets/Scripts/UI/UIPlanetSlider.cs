@@ -13,6 +13,7 @@ public class UIPlanetSlider : MonoBehaviour
     [SerializeField] PlayerMove playerMove;
     [SerializeField] public PlayerUpgrades playerUpg;
     [SerializeField] Planet planet;
+    [SerializeField] StoreManager storeManager;
 
     [SerializeField] Slider planetSliderUI;
 
@@ -64,6 +65,22 @@ public class UIPlanetSlider : MonoBehaviour
 
             if (planetSliderUI.value <= 0)
             {
+                if (planet.CompareTag("Moon"))
+                {
+                    if (storeManager.moonFuelMax)
+                    {
+                        playerMove.fuelMoonComplete = true;
+                    }
+
+                    else { return; }
+
+                    if (storeManager.moonSellMax)
+                    {
+                        playerMove.sellMoonComplete = true;
+                    }
+                    else { return; }
+
+                }
                 planet.isScanned = true;
                 playerUpg.ReceivePlanetItem(planet);
                 //playerUpg.inventory[]
