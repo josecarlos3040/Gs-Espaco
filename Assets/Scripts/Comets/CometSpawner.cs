@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CometSpawner : MonoBehaviour
 {
+
+    public int attempts = 0;
     [Header("Prefabs")]
     [SerializeField] GameObject[] cometPrefabs;
 
@@ -25,7 +27,7 @@ public class CometSpawner : MonoBehaviour
 
     public void SpawnComets()
     {
-        int attempts = 0;
+        attempts = 0;
 
         while (spawnedPositions.Count < cometAmount && attempts < 1000)
         {
@@ -61,9 +63,13 @@ public class CometSpawner : MonoBehaviour
 
     public void DestroyAllComets()
     {
+        attempts = 0;
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
+            
         }
+        // Limpa as posições registradas para permitir novo spawn
+        spawnedPositions.Clear();
     }
 }

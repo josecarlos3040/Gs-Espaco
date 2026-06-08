@@ -24,10 +24,18 @@ public class UIButtonsManager : MonoBehaviour
     [SerializeField] GameObject scanner;
     [SerializeField] CometSpawner cometSpawner;
     public GameObject sellButton;
+    [SerializeField] int storeWeb;
+    [SerializeField] GameObject changeButton;
+    [SerializeField] GameObject backButton;
 
     [SerializeField] GameObject player;
     [SerializeField] InventoryUI inventoryUI;
 
+    [SerializeField] GameObject store;
+    [SerializeField] GameObject storeButton;
+
+    [SerializeField] GameObject shipUpgrades;
+    [SerializeField] GameObject moonUpgrades;
 
     [SerializeField] GameObject cineCamera;
     [SerializeField] CinemachineSplineDolly dolly;
@@ -38,6 +46,8 @@ public class UIButtonsManager : MonoBehaviour
         dolly.AutomaticDolly.Enabled = false;
 
         scanner.SetActive(false);
+
+        store.SetActive(false);
     }
 
     void Update()
@@ -47,6 +57,7 @@ public class UIButtonsManager : MonoBehaviour
         if (playerFuel.inGame == false)
         {
             startButton.SetActive(true);
+
             playerFuel.fuelSlider.maxValue = playerFuel.maxFuel;
             playerFuel.fuelSlider.value = playerFuel.maxFuel;
         }
@@ -55,7 +66,7 @@ public class UIButtonsManager : MonoBehaviour
             startButton.SetActive(false);
         }
 
-        if(playerFuel.gameOver == true)
+        if (playerFuel.gameOver == true)
         {
             gameOverButton.SetActive(true);
         }
@@ -70,8 +81,28 @@ public class UIButtonsManager : MonoBehaviour
 
             if (auto.Method is SplineAutoDolly.FixedSpeed fixedSpeed)
             {
-                fixedSpeed.Speed = playerMove.speed / 200;
+                fixedSpeed.Speed = playerMove.speed / 170;
             }
+        }
+
+        if (playerMove.scannedMoon)
+        {
+            changeButton.SetActive(true);
+            backButton.SetActive(true);
+
+        }
+        else
+        {
+            changeButton.SetActive(false);
+            backButton.SetActive(false);
+        }
+        if(storeWeb == 1)
+        {
+            backButton.SetActive(false);
+        }
+        else if(storeWeb == 3)
+        {
+            changeButton.SetActive(false);
         }
     }
     public void StartGame()
@@ -83,6 +114,10 @@ public class UIButtonsManager : MonoBehaviour
 
         scanner.SetActive(true);
         sellButton.SetActive(false);
+
+        storeButton.SetActive(false);
+        store.SetActive(false);
+
         var auto = dolly.AutomaticDolly;
 
         cometSpawner.SpawnComets();
@@ -109,6 +144,8 @@ public class UIButtonsManager : MonoBehaviour
 
         barrerCamera.cameraSpace.SetActive(false);
         barrerCamera.cameraDolly.SetActive(true);
+
+        storeButton.SetActive(true);
 
         playerMove.rb.useGravity = true;
         playerMove.isOrbit = false;
@@ -148,5 +185,57 @@ public class UIButtonsManager : MonoBehaviour
 
         if (inventoryUI != null)
             inventoryUI.Refresh();
+    }
+
+    public void OpenStore()
+    {
+        storeButton.SetActive(false);
+        store.SetActive(true);
+        storeWeb = 1;
+    }
+
+    public void CloseStore()
+    {
+        storeButton.SetActive(true);
+        store.SetActive(false);
+    }
+
+    public void ChangeWeb()
+    {
+        if (storeWeb == 1)
+        {
+            storeWeb++;
+
+            shipUpgrades.SetActive(false);
+            moonUpgrades.SetActive(true);
+        }
+
+        else if (storeWeb == 2)
+        {
+            storeWeb++;
+
+            shipUpgrades.SetActive(false);
+            moonUpgrades.SetActive(false);
+
+            changeButton.SetActive(false);
+        }
+    }
+
+    public void BackWeb()
+    {
+        if (storeWeb == 2)
+        {
+            storeWeb--;
+
+            shipUpgrades.SetActive(true);
+            moonUpgrades.SetActive(false);
+        }
+        else if(storeWeb == 3)
+        {
+            storeWeb--;
+
+            shipUpgrades.SetActive(false);
+            moonUpgrades.SetActive(true);
+        }
     }
 }

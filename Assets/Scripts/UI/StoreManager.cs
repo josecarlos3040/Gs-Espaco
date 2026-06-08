@@ -17,8 +17,8 @@ public class StoreManager : MonoBehaviour
     [SerializeField] Button rewardMultButton;
     [SerializeField] Button inventoryButton;
 
-    [SerializeField] Button fuelMoonButton;
-    [SerializeField] Button sellMoonButton;
+    public Button fuelMoonButton;
+    public Button sellMoonButton;
 
     [Header("Buy Prices")]
     [SerializeField] float speedPrice;
@@ -136,6 +136,7 @@ public class StoreManager : MonoBehaviour
         {
             playerUpgrades.money -= moonFuelPrice;
             moonFuelMax = true;
+            sellMoonButton.interactable = false;
         }
     }
     public void SeelMoon()
@@ -144,6 +145,7 @@ public class StoreManager : MonoBehaviour
         {
             playerUpgrades.money -= moonFuelPrice;
             moonSellMax = true;
+            fuelMoonButton.interactable = false;
         }
     }
 }

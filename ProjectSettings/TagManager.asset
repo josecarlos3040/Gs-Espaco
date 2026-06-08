@@ -8,6 +8,7 @@ TagManager:
   - Planet2
   - InitialSpeed
   - SpaceBarrer
+  - Moon
   layers:
   - Default
   - TransparentFX

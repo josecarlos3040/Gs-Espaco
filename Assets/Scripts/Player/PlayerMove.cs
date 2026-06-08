@@ -30,6 +30,8 @@ public class PlayerMove : MonoBehaviour
     public bool fuelMoonComplete = false;
     public bool sellMoonComplete = false;
 
+    public bool scannedMoon = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();

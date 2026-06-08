@@ -67,9 +67,11 @@ public class UIPlanetSlider : MonoBehaviour
             {
                 if (planet.CompareTag("Moon"))
                 {
+                    playerMove.scannedMoon = true;
                     if (storeManager.moonFuelMax)
                     {
                         playerMove.fuelMoonComplete = true;
+                        storeManager.sellMoonButton.interactable = true;
                     }
 
                     else { return; }
@@ -77,12 +79,18 @@ public class UIPlanetSlider : MonoBehaviour
                     if (storeManager.moonSellMax)
                     {
                         playerMove.sellMoonComplete = true;
+                        storeManager.fuelMoonButton.interactable = true;
                     }
                     else { return; }
 
                 }
                 planet.isScanned = true;
-                playerUpg.ReceivePlanetItem(planet);
+                if (planet.CompareTag("Moon"))
+                {
+                    return;
+                }
+                else { playerUpg.ReceivePlanetItem(planet); }
+                
                 //playerUpg.inventory[]
                 //playerUpg.money += moneyReward;
 

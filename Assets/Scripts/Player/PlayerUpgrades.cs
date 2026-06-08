@@ -23,6 +23,7 @@ public class PlayerUpgrades : MonoBehaviour
     public void InteractWithPlanet(Planet planet)
     {
         AddItem(planet.GetItem());
+
     }
     public void ReceivePlanetItem(Planet planet)
     {
