@@ -39,6 +39,13 @@ public class PlayerMove : MonoBehaviour
 
     public bool scannedMoon = false;
 
+    //--------------
+    public bool fuelMarsComplete = false;
+    public bool sellMarsComplete = false;
+    public bool finalMarsComplete = false;
+
+    public bool scannedMars = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -224,6 +231,47 @@ public class PlayerMove : MonoBehaviour
             {
                 buttonsManager.sellButton.SetActive(true);
             }
+
+            if(fuelMoonComplete && sellMoonComplete)
+            {
+                buttonsManager.gameObject.SetActive(true);
+            }
+        }
+
+        if (other.gameObject.CompareTag("Mars"))
+        {
+            Planet planetScript = other.GetComponentInParent<Planet>();
+
+            orbitCenter = planetScript.orbitCenter;
+            planet = other.transform;
+
+            Vector3 surfacePoint = other.ClosestPoint(orbitPivot.position);
+
+            Vector3 dir = surfacePoint - orbitCenter.position;
+
+            orbitRadius = dir.magnitude;
+
+            orbitAngle = Mathf.Atan2(dir.y, dir.z);
+
+            isOrbit = true;
+
+            rb.linearVelocity = Vector3.zero;
+            rb.useGravity = false;
+
+            //rotaciona a nava
+            Vector3 euler = transform.eulerAngles;
+            transform.rotation = Quaternion.Euler(euler.x, 90f, euler.z);
+            planetSlider.gameObject.SetActive(true);
+            planetPreview.gameObject.SetActive(true);
+
+            if (fuelMarsComplete)
+            {
+                playerFuel.fuelSlider.value = playerFuel.fuelSlider.maxValue;
+            }
+            if (sellMarsComplete)
+            {
+                buttonsManager.sellButton.SetActive(true);
+            }
         }
 
         if (other.gameObject.CompareTag("InitialSpeed"))
@@ -237,6 +285,7 @@ public class PlayerMove : MonoBehaviour
         if (other.gameObject.CompareTag("Moon"))
         {
             buttonsManager.sellButton.SetActive(false);
+            buttonsManager.goToMars.gameObject.SetActive(false);
         }
     }
     void CheckBounds()

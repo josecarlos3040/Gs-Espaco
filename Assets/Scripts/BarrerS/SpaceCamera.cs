@@ -17,6 +17,10 @@ public class SpaceCamera : MonoBehaviour
     Vector3 targetPosition;
     bool movingCamera;
 
+    
+
+
+
     void Update()
     {
         // Acabou de entrar em órbita
@@ -53,6 +57,17 @@ public class SpaceCamera : MonoBehaviour
             playerMove.orbitCenter.position.z + orbitCamOffsetZ,
             125f,
             145f
+        );
+
+        movingCamera = true;
+    }
+
+    public void MoveToInitialPosition()
+    {
+        targetPosition = new Vector3(
+            -54.0999985f,
+            209.950012f,
+            135.820007f
         );
 
         movingCamera = true;
