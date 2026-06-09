@@ -82,6 +82,7 @@ public class UIPlanetSlider : MonoBehaviour
 
 
             planetSliderUI.value = Mathf.Max(0, planetSliderUI.value - Time.deltaTime);
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.Scan);
 
             if (planetSliderUI.value <= 0)
             {

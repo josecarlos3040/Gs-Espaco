@@ -206,6 +206,7 @@ public class PlayerMove : MonoBehaviour
             rb.useGravity = false;
 
             Instantiate(ExplosionPrefab, transform);
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.explosion);
         }
 
         if (other.gameObject.CompareTag("Moon"))
@@ -324,6 +325,7 @@ public class PlayerMove : MonoBehaviour
             playerFuel.gameOver = true;
             playerFuel.fuelSlider.value = 0;
             rb.useGravity = false;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.explosion);
         }
     }
     public void ExitOrbit()

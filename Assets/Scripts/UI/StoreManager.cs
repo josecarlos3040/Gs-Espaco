@@ -175,6 +175,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= speedPrice;
             speedActual++;
             playerMove.speed += 3;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
 
@@ -185,6 +186,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= fuelPrice;
             fuelActual++;
             playerFuel.maxFuel += 10;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
 
@@ -195,6 +197,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= scanSpeedPrice;
             scanSpeedActual++;
             playerUpgrades.scanerTime -= 0.1f;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
 
@@ -205,6 +208,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= rewardMultPrice;
             rewardMultActual++;
             buttonsManager.moneyReward += 5;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
 
@@ -215,6 +219,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= inventoryPrice;
             inventoryActual++;
             playerUpgrades.maxInventory += 4;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
 
@@ -227,6 +232,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= moonFuelPrice;
             moonFuelMax = true;
             sellMoonButton.interactable = false;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
     public void SeelMoon()
@@ -236,6 +242,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= moonFuelPrice;
             moonSellMax = true;
             fuelMoonButton.interactable = false;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
 
@@ -246,6 +253,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= marsFuelPrice;
             marsFuelMax = true;
             sellMarsButton.interactable = false;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
     public void SeelMars()
@@ -255,6 +263,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= marsFuelPrice;
             marsSellMax = true;
             fuelMarsButton.interactable = false;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
 
@@ -265,6 +274,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= marsColonyPrice;
             marsColonyMax = true;
             colonyMars.interactable = false;
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
         }
     }
 }
