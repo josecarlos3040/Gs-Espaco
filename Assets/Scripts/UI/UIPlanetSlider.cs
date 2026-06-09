@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,9 +17,12 @@ public class UIPlanetSlider : MonoBehaviour
     [SerializeField] StoreManager storeManager;
 
     [SerializeField] Slider planetSliderUI;
+    [SerializeField] GameObject fillObject;
 
     [SerializeField] RawImage planetPreviewUI;
     [SerializeField] Transform previewRoot;
+
+    [SerializeField] UIButtonsManager buttonsManager;
 
     Planet lastPlanet;
 
@@ -30,13 +34,15 @@ public class UIPlanetSlider : MonoBehaviour
     {
         planetSliderUI.gameObject.SetActive(false);
         planetPreviewUI.gameObject.SetActive(false);
+
+        buttonsManager.goBackText.gameObject.SetActive(false);
     }
 
     public void Update()
     {
+        
         if (planet.isScanned)
         {
-            HidePreview();
             return;
         }
 
@@ -53,6 +59,7 @@ public class UIPlanetSlider : MonoBehaviour
             return;
         }
         // Verifica se o player está em órbita e se o planeta atual do player é este planeta
+
         bool orbitingThisPlanet = playerMove.isOrbit && playerMove.planet != null && playerMove.planet.GetComponentInParent<Planet>() == planet;
 
         if (orbitingThisPlanet)
@@ -71,22 +78,31 @@ public class UIPlanetSlider : MonoBehaviour
                 SetSliderValue();
 
                 ShowPlanetPreview();
-                planetPreviewUI.gameObject.SetActive(true);
             }
 
-            planetSliderUI.gameObject.SetActive(true);
-            
+
             planetSliderUI.value = Mathf.Max(0, planetSliderUI.value - Time.deltaTime);
 
             if (planetSliderUI.value <= 0)
             {
+                fillObject.SetActive(false);
+
+
                 if (planet.CompareTag("Moon"))
                 {
                     playerMove.scannedMoon = true;
+
+                    if(!playerMove.sellMoonComplete && !playerMove.fuelMoonComplete)
+                    {
+                        buttonsManager.goBackText.gameObject.SetActive(true);
+                    }
+                    
                     if (storeManager.moonFuelMax)
                     {
                         playerMove.fuelMoonComplete = true;
+                        storeManager.moonFuelMax = false;
                         storeManager.sellMoonButton.interactable = true;
+                        
                     }
 
                     else { return; }
@@ -94,10 +110,12 @@ public class UIPlanetSlider : MonoBehaviour
                     if (storeManager.moonSellMax)
                     {
                         playerMove.sellMoonComplete = true;
+                        storeManager.moonSellMax = false;
                         storeManager.fuelMoonButton.interactable = true;
+                        
                     }
                     else { return; }
-
+                    
                 }
                 
                 if (planet.CompareTag("Moon"))
@@ -112,24 +130,20 @@ public class UIPlanetSlider : MonoBehaviour
                 //playerUpg.inventory[]
                 //playerUpg.money += moneyReward;
 
-                planetSliderUI.gameObject.SetActive(false);
-
-                planetSliderUI.gameObject.SetActive(false);
-                planetPreviewUI.gameObject.SetActive(false);
-
                 if (currentPreview != null)
                 {
                     Destroy(currentPreview);
                     currentPreview = null;
                 }
-                planetSliderUI.gameObject.SetActive(false);
-                planetPreviewUI.gameObject.SetActive(false);
+
+            
             }
         }
         else
         {
-            planetSliderUI.gameObject.SetActive(false);
-            planetPreviewUI.gameObject.SetActive(false);
+            Debug.Log("NÃO ESTÁ EM ORBITA DESSE PLANETA");
+            fillObject.SetActive(true);
+
             HidePreview();
 
 
@@ -138,6 +152,7 @@ public class UIPlanetSlider : MonoBehaviour
 
     public void SetSliderValue()
     {
+        fillObject.SetActive(true);
         planetCompletionTime = playerMove.orbitRadius * playerUpg.scanerTime;
 
         
@@ -166,13 +181,48 @@ public class UIPlanetSlider : MonoBehaviour
             LayerMask.NameToLayer("PlanetPreview")
         );
 
-        if (planet.CompareTag("Moon"))
+
+        if(planet.CompareTag("Moon") && storeManager.moonFuelMax)
+        {
+            currentPreview.SetActive(true);
+            currentPreview.transform.localPosition = new Vector3(0.002930165f, -0.233058f, 3.794358f);
+
+            currentPreview.transform.localRotation = Quaternion.Euler(-130.264f, 0f, 0f);
+
+            currentPreview.transform.localScale = new Vector3(90.95363f, 90.95363f, 90.95363f);
+            ResetChildrenTransforms(currentPreview.transform);
+        }
+        else if(planet.CompareTag("Moon") && storeManager.moonSellMax)
+        {
+            currentPreview.SetActive(true);
+
+            currentPreview.transform.localPosition = new Vector3(0.0633983f, -0.6686959f, -15.7071f);
+
+            currentPreview.transform.localRotation = Quaternion.Euler(-132.003f, -0.7269897f, 92.685f);
+
+            currentPreview.transform.localScale = new Vector3(51.01642f, 51.01642f, 51.01642f);
+            ResetChildrenTransforms(currentPreview.transform);
+        }
+
+        else if (planet.CompareTag("Moon"))
         {
             currentPreview.transform.localPosition = new Vector3(0, 0, 20);
         }
         else
         {
             currentPreview.transform.localPosition = new Vector3(0, 0, -15);
+        }
+    }
+
+    void ResetChildrenTransforms(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            child.localPosition = Vector3.zero;
+            child.localRotation = Quaternion.identity;
+            child.localScale = Vector3.one;
+
+            ResetChildrenTransforms(child);
         }
     }
 
@@ -190,8 +240,11 @@ public class UIPlanetSlider : MonoBehaviour
     {
         if (currentPreview != null)
         {
+            playerMove.planetSlider.gameObject.SetActive(false);
+            
             Destroy(currentPreview);
             currentPreview = null;
+            
         }
 
         initialized = false;

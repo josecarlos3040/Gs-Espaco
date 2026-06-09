@@ -96,7 +96,7 @@ public class CometEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
 {
-    if (other.CompareTag("Planet") || other.CompareTag("Planet2"))
+    if (other.CompareTag("Planet") || other.CompareTag("Planet2") || other.CompareTag("Moon") || other.CompareTag("Satelite"))
     {
         if (goingToTarget)
         {

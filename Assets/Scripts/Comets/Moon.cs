@@ -9,6 +9,7 @@ public class Moon : MonoBehaviour
 
     [SerializeField] GameObject baseMoon;
     [SerializeField] GameObject antenna;
+    [SerializeField] GameObject moonO;
 
     void Start()
     {
@@ -18,6 +19,15 @@ public class Moon : MonoBehaviour
 
     private void Update()
     {
+        if(playerMove.fuelMoonComplete && storeManager.moonFuelMax == false)
+        {
+            planet.previewModel = moonO;
+        }
+        if (playerMove.sellMoonComplete && storeManager.moonSellMax == false)
+        {
+            planet.previewModel = moonO;
+        }
+
         if (storeManager.moonSellMax)
         {
             planet.previewModel = antenna;
@@ -26,6 +36,7 @@ public class Moon : MonoBehaviour
         {
             planet.previewModel = baseMoon;
         }
+
 
 
         if (playerMove.fuelMoonComplete)

@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class StoreManager : MonoBehaviour
+public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Components")]
     [SerializeField] PlayerMove playerMove;
@@ -43,11 +44,24 @@ public class StoreManager : MonoBehaviour
     [Header("Actual Upgrades")]
     [SerializeField] float speedActual = 1;
     [SerializeField] float fuelActual = 1;
-    [SerializeField] float scanSpeedActual = 1;
+    [SerializeField] public float scanSpeedActual = 1;
     [SerializeField] float rewardMultActual = 1;
     [SerializeField] float inventoryActual = 1;
+
+    [SerializeField] Texture2D handCursor;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Cursor.SetCursor(handCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
+
     void Update()
     {
+
         if(speedActual >= speedMax)
         {
             speedButton.interactable = false;
@@ -74,6 +88,14 @@ public class StoreManager : MonoBehaviour
             fuelMoonButton.interactable = false;
         }
         if (moonSellMax)
+        {
+            sellMoonButton.interactable = false;
+        }
+        if (playerMove.fuelMoonComplete)
+        {
+            fuelMoonButton.interactable = false;
+        }
+        if (playerMove.sellMoonComplete)
         {
             sellMoonButton.interactable = false;
         }

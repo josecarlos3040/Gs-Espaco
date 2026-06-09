@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 public class PlayerMove : MonoBehaviour
 {
     [Header("Player Move")]
@@ -21,6 +22,10 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] PlayerFuel playerFuel;
     [SerializeField] StoreManager storeManager;
     [SerializeField] UIButtonsManager buttonsManager;
+
+    [SerializeField] public Slider planetSlider;
+    [SerializeField] public RawImage planetPreview;
+
 
     private PlayerControls controls;
 
@@ -142,6 +147,10 @@ public class PlayerMove : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.useGravity = false;
 
+            buttonsManager.scanner.SetActive(true);
+            buttonsManager.statsPanel.SetActive(false);
+            buttonsManager.inventoryPanel.SetActive(false);
+
             Vector3 euler = transform.eulerAngles;
             transform.rotation = Quaternion.Euler(euler.x, 90f, euler.z);
         }
@@ -169,6 +178,9 @@ public class PlayerMove : MonoBehaviour
             //rotaciona a nava
             Vector3 euler = transform.eulerAngles;
             transform.rotation = Quaternion.Euler(euler.x, 90f, euler.z);
+
+            planetSlider.gameObject.SetActive(true);
+            planetPreview.gameObject.SetActive(true);
         }
 
         if (other.gameObject.CompareTag("Planet2"))
@@ -201,6 +213,8 @@ public class PlayerMove : MonoBehaviour
             //rotaciona a nava
             Vector3 euler = transform.eulerAngles;
             transform.rotation = Quaternion.Euler(euler.x, 90f, euler.z);
+            planetSlider.gameObject.SetActive(true);
+            planetPreview.gameObject.SetActive(true);
 
             if (fuelMoonComplete)
             {

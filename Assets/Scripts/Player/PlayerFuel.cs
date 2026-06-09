@@ -16,11 +16,13 @@ public class PlayerFuel : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerMove.isOrbit)
+
+        if (playerMove.isOrbit && !inSateliteOrbit)
         {
-            fuelSlider.value -= Time.deltaTime;
+            fuelSlider.value -= Time.fixedDeltaTime;
         }
-        if(fuelSlider.value <= 0)
+
+        if (fuelSlider.value <= 0)
         {
             playerMove.outFuel = true;
             gameOver = true;
@@ -40,12 +42,16 @@ public class PlayerFuel : MonoBehaviour
         if (other.CompareTag("Satelite"))
         {
             inSateliteOrbit = true;
+            fuelSlider.value = maxFuel;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        inSateliteOrbit = false;
+        if (other.CompareTag("Satelite"))
+        {
+            inSateliteOrbit = false;
+        }
     }
 
 }

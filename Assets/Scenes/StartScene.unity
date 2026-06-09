@@ -14504,6 +14504,8 @@ MonoBehaviour:
   playerFuel: {fileID: 1211809209}
   storeManager: {fileID: 0}
   buttonsManager: {fileID: 0}
+  planetSlider: {fileID: 0}
+  planetPreview: {fileID: 0}
   isOrbit: 0
   outFuel: 0
   passedCloud: 0
@@ -25284,6 +25286,7 @@ MonoBehaviour:
   playerFuel: {fileID: 1211809209}
   playerMove: {fileID: 1211809210}
   playerUpg: {fileID: 1211809205}
+  storeManager: {fileID: 0}
   startButton: {fileID: 0}
   gameOverButton: {fileID: 0}
   particleLaunch: {fileID: 321485701}
@@ -25300,8 +25303,13 @@ MonoBehaviour:
   storeButton: {fileID: 0}
   shipUpgrades: {fileID: 0}
   moonUpgrades: {fileID: 0}
+  statsPanel: {fileID: 0}
+  inventoryPanel: {fileID: 0}
   cineCamera: {fileID: 0}
   dolly: {fileID: 0}
+  statsSpeedText: {fileID: 0}
+  statsScanerText: {fileID: 0}
+  statsMoneyText: {fileID: 0}
 --- !u!114 &1350460280
 MonoBehaviour:
   m_ObjectHideFlags: 0

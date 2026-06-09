@@ -1,16 +1,20 @@
 using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static Unity.Cinemachine.SplineAutoDolly;
 using static UnityEngine.Rendering.DebugUI;
 
-public class UIButtonsManager : MonoBehaviour
+public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] public float moneyReward;
     public int qtdDays = 0;
+
     [Header("Components")]
     [SerializeField] TextMeshProUGUI textMeshDay;
     [SerializeField] TextMeshProUGUI textInventory;
+
+    [SerializeField] public TextMeshProUGUI goBackText;
 
     [SerializeField] BarrerShip barrerShip;
     [SerializeField] BarrerCamera barrerCamera;
@@ -19,13 +23,14 @@ public class UIButtonsManager : MonoBehaviour
     [SerializeField] PlayerFuel playerFuel;
     [SerializeField] PlayerMove playerMove;
     [SerializeField] PlayerUpgrades playerUpg;
+    [SerializeField] StoreManager storeManager;
 
     [SerializeField] GameObject startButton;
     [SerializeField] GameObject gameOverButton;
     [SerializeField] GameObject particleLaunch;
 
     [SerializeField] TextMeshProUGUI moneyText;
-    [SerializeField] GameObject scanner;
+    [SerializeField] public GameObject scanner;
     [SerializeField] CometSpawner cometSpawner;
     public GameObject sellButton;
     [SerializeField] int storeWeb;
@@ -41,9 +46,28 @@ public class UIButtonsManager : MonoBehaviour
     [SerializeField] GameObject shipUpgrades;
     [SerializeField] GameObject moonUpgrades;
 
+    [SerializeField] public GameObject statsPanel;
+    [SerializeField] public GameObject inventoryPanel;
+
     [SerializeField] GameObject cineCamera;
     [SerializeField] CinemachineSplineDolly dolly;
 
+
+    [SerializeField] TextMeshProUGUI statsSpeedText;
+    [SerializeField] TextMeshProUGUI statsScanerText;
+    [SerializeField] TextMeshProUGUI statsMoneyText;
+
+    [SerializeField] Texture2D handCursor;
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Cursor.SetCursor(handCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
 
     void Start()
     {
@@ -110,6 +134,12 @@ public class UIButtonsManager : MonoBehaviour
         }
 
         textInventory.text = "Storage: " + playerUpg.inventory.Count + "/"+ playerUpg.maxInventory;
+
+        
+        statsSpeedText.text = "Speed: " + playerMove.speed.ToString();
+        statsScanerText.text = "Scaner: " + storeManager.scanSpeedActual.ToString();
+        statsMoneyText.text = "Money Mult: " + moneyReward.ToString();
+
     }
     public void StartGame()
     {
@@ -120,7 +150,6 @@ public class UIButtonsManager : MonoBehaviour
         particleLaunch.SetActive(true);
         playerMove.passedCloud = false;
 
-        scanner.SetActive(true);
         sellButton.SetActive(false);
 
         storeButton.SetActive(false);
@@ -149,6 +178,11 @@ public class UIButtonsManager : MonoBehaviour
 
         barrerShip.propulsor.SetActive(true);
         barrerShip.trail.SetActive(false);
+
+        statsPanel.SetActive(true);
+        inventoryPanel.SetActive(true);
+
+        goBackText.gameObject.SetActive(false);
 
         barrerCamera.cameraSpace.SetActive(false);
         barrerCamera.cameraDolly.SetActive(true);
@@ -184,8 +218,11 @@ public class UIButtonsManager : MonoBehaviour
             {
                 playerUpg.money += 1 * moneyReward;
             }
-            
-            
+            if (item.itemName == "2")
+            {
+                playerUpg.money += 2 * moneyReward;
+            }
+
             Debug.Log("Removendo item: " + item.itemName);
         }
 
