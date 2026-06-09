@@ -42,7 +42,7 @@ public class PlayerMove : MonoBehaviour
     [Header("VFX")]
     [SerializeField] GameObject LockInPrefab;
     [SerializeField] GameObject LockOutPrefab;
-    [SerializeField] GameObject LockOutFirePrefab;
+    [SerializeField] public GameObject LockOutFirePrefab;
     [SerializeField] GameObject ExplosionPrefab;
 
     //--------------
@@ -170,6 +170,7 @@ public class PlayerMove : MonoBehaviour
 
         if (other.CompareTag("Planet"))
         {
+            Instantiate(LockInPrefab, transform);
             Planet planetScript = other.GetComponentInParent<Planet>();
 
             orbitCenter = planetScript.orbitCenter;
@@ -201,10 +202,13 @@ public class PlayerMove : MonoBehaviour
             playerFuel.gameOver = true;
             playerFuel.fuelSlider.value = 0;
             rb.useGravity = false;
+
+            Instantiate(ExplosionPrefab, transform);
         }
 
         if (other.gameObject.CompareTag("Moon"))
         {
+            Instantiate(LockInPrefab, transform);
             Planet planetScript = other.GetComponentInParent<Planet>();
 
             orbitCenter = planetScript.orbitCenter;
@@ -246,6 +250,7 @@ public class PlayerMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("Mars"))
         {
+            Instantiate(LockInPrefab, transform);
             Planet planetScript = other.GetComponentInParent<Planet>();
 
             orbitCenter = planetScript.orbitCenter;
@@ -290,8 +295,18 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Moon"))
         {
+            Instantiate(LockOutPrefab, transform);
+            
             buttonsManager.sellButton.SetActive(false);
             buttonsManager.goToMars.gameObject.SetActive(false);
+        }
+        if (other.gameObject.CompareTag("Mars"))
+        {
+            Instantiate(LockOutPrefab, transform);
+        }
+        if (other.gameObject.CompareTag("Planet"))
+        {
+            Instantiate(LockOutPrefab, transform);
         }
     }
     void CheckBounds()

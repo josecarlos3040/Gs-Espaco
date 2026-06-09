@@ -3,7 +3,9 @@ using UnityEngine;
 public class BarrerShip : MonoBehaviour
 {
     public GameObject propulsor;
-    public GameObject trail; 
+    public GameObject trail;
+
+    [SerializeField] PlayerMove playerMove;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -11,6 +13,7 @@ public class BarrerShip : MonoBehaviour
             propulsor.SetActive(false);
             trail.SetActive(true);
 
+            Instantiate(playerMove.LockOutFirePrefab, playerMove.transform);
             // Atualiza a iluminação ambiente
             //DynamicGI.UpdateEnvironment();
         }
