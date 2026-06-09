@@ -9,6 +9,7 @@ public class SkyboxChanger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             RenderSettings.skybox = spaceSkybox;
+            SoundManager.Instance.StopSFX();
 
             // Atualiza a iluminação ambiente
             //DynamicGI.UpdateEnvironment();

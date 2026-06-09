@@ -13,7 +13,6 @@ public class SoundManager : MonoBehaviour
     public AudioClip explosion;
     public AudioClip start; 
     public AudioClip backgroundMusic;
-    public AudioClip Scan;
 
     private void Awake()
     {
@@ -49,5 +48,10 @@ public class SoundManager : MonoBehaviour
     public void StopMusic()
     {
         musicSource.Stop();
+    }
+
+    public void StopSFX()
+    {
+        sfxSource.Stop();
     }
 }

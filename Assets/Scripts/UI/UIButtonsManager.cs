@@ -90,7 +90,6 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
         changeButton.SetActive(false);
         backButton.SetActive(false);
 
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.start);
     }
 
     void Update()
@@ -162,6 +161,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         qtdDays++;
         SoundManager.Instance.PlaySFX(SoundManager.Instance.click);
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.start);
         textMeshDay.text = "Day: " + qtdDays.ToString();
         playerFuel.inGame = true;
         dolly.AutomaticDolly.Enabled = true;
