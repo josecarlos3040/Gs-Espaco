@@ -8897,7 +8897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 8.5, y: -19.6}
+  m_AnchoredPosition: {x: 8.5, y: -19.599976}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &316552719
@@ -22085,7 +22085,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 9.1, y: -9.3}
+  m_AnchoredPosition: {x: 9.099976, y: -9.299988}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1090090056
@@ -34449,16 +34449,16 @@ MonoBehaviour:
   sellMoonButton: {fileID: 791685469}
   fuelMarsButton: {fileID: 839453111}
   sellMarsButton: {fileID: 1539971548}
-  speedPrice: 1
-  fuelPrice: 1
-  scanSpeedPrice: 1
-  rewardMultPrice: 1
-  inventoryPrice: 1
-  moonFuelPrice: 1
-  moonSellPrice: 1
-  marsFuelPrice: 0
-  marsSellPrice: 0
-  marsColonyPrice: 0
+  speedPrice: 15
+  fuelPrice: 30
+  scanSpeedPrice: 30
+  rewardMultPrice: 50
+  inventoryPrice: 60
+  moonFuelPrice: 50
+  moonSellPrice: 50
+  marsFuelPrice: 100
+  marsSellPrice: 100
+  marsColonyPrice: 150
   speedPriceText: {fileID: 877260652}
   fuelPriceText: {fileID: 528030085}
   scanSpeedText: {fileID: 134169719}
