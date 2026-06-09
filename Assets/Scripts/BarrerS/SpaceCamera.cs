@@ -17,7 +17,7 @@ public class SpaceCamera : MonoBehaviour
     Vector3 targetPosition;
     bool movingCamera;
 
-    
+
 
 
 
@@ -64,12 +64,14 @@ public class SpaceCamera : MonoBehaviour
 
     public void MoveToInitialPosition()
     {
-        targetPosition = new Vector3(
+        movingCamera = false;
+
+        orbitCam.transform.position = new Vector3(
             -54.0999985f,
             209.950012f,
             135.820007f
         );
 
-        movingCamera = true;
+        wasOrbit = false;
     }
 }
