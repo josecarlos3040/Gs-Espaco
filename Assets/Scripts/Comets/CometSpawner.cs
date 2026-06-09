@@ -24,7 +24,17 @@ public class CometSpawner : MonoBehaviour
 
     List<Vector3> spawnedPositions = new();
 
+    [SerializeField] PlayerMove playerMove;
+    [SerializeField] bool firstSpawned = false;
 
+    private void Update()
+    {
+        if(playerMove.fuelMoonComplete && playerMove.sellMoonComplete && firstSpawned == false)
+        {
+            firstSpawned = true;
+            SpawnComets();
+        }
+    }
     public void SpawnComets()
     {
         attempts = 0;

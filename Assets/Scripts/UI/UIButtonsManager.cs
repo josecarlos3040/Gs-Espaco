@@ -15,6 +15,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] TextMeshProUGUI textInventory;
 
     [SerializeField] public TextMeshProUGUI goBackText;
+    [SerializeField] public TextMeshProUGUI goToMars;
 
     [SerializeField] BarrerShip barrerShip;
     [SerializeField] BarrerCamera barrerCamera;
@@ -32,6 +33,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] public GameObject scanner;
     [SerializeField] CometSpawner cometSpawner;
+    [SerializeField] SpaceCamera spaceCamera;
     public GameObject sellButton;
     [SerializeField] int storeWeb;
     [SerializeField] GameObject changeButton;
@@ -45,9 +47,11 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     [SerializeField] GameObject shipUpgrades;
     [SerializeField] GameObject moonUpgrades;
+    [SerializeField] GameObject marsUpgrades;
 
     [SerializeField] public GameObject statsPanel;
     [SerializeField] public GameObject inventoryPanel;
+    [SerializeField] public GameObject quests;
 
     [SerializeField] GameObject cineCamera;
     [SerializeField] CinemachineSplineDolly dolly;
@@ -58,6 +62,9 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] TextMeshProUGUI statsMoneyText;
 
     [SerializeField] Texture2D handCursor;
+
+    [SerializeField] GameObject spawnCometsToMars;
+    [SerializeField] GameObject spawnCometsAfterMars;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -76,6 +83,9 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
         scanner.SetActive(false);
 
         store.SetActive(false);
+
+        changeButton.SetActive(false);
+        backButton.SetActive(false);
     }
 
     void Update()
@@ -113,25 +123,16 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
             }
         }
 
-        if (playerMove.scannedMoon)
+        if (playerMove.scannedMoon == true && storeWeb == 1)
         {
             changeButton.SetActive(true);
-            backButton.SetActive(true);
+        }
 
-        }
-        else
-        {
-            changeButton.SetActive(false);
-            backButton.SetActive(false);
-        }
-        if(storeWeb == 1)
-        {
-            backButton.SetActive(false);
-        }
-        else if(storeWeb == 3)
+        if(playerMove.scannedMars == false && storeWeb == 2)
         {
             changeButton.SetActive(false);
         }
+
 
         textInventory.text = "Storage: " + playerUpg.inventory.Count + "/"+ playerUpg.maxInventory;
 
@@ -139,6 +140,16 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
         statsSpeedText.text = "Speed: " + playerMove.speed.ToString();
         statsScanerText.text = "Scaner: " + storeManager.scanSpeedActual.ToString();
         statsMoneyText.text = "Money Mult: " + moneyReward.ToString();
+
+
+        if(playerMove.fuelMoonComplete && playerMove.sellMoonComplete)
+        {
+            spawnCometsToMars.SetActive(true);
+        }
+        if(playerMove.fuelMarsComplete && playerMove.fuelMarsComplete)
+        {
+            spawnCometsAfterMars.SetActive(true);
+        }
 
     }
     public void StartGame()
@@ -154,6 +165,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         storeButton.SetActive(false);
         store.SetActive(false);
+        quests.SetActive(false);
 
         var auto = dolly.AutomaticDolly;
 
@@ -183,11 +195,12 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
         inventoryPanel.SetActive(true);
 
         goBackText.gameObject.SetActive(false);
-
+        spaceCamera.MoveToInitialPosition();
         barrerCamera.cameraSpace.SetActive(false);
         barrerCamera.cameraDolly.SetActive(true);
 
         storeButton.SetActive(true);
+        quests.SetActive(true);
 
         playerMove.rb.useGravity = true;
         playerMove.isOrbit = false;
@@ -253,6 +266,8 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
             shipUpgrades.SetActive(false);
             moonUpgrades.SetActive(true);
+
+            backButton.SetActive(true);
         }
 
         else if (storeWeb == 2)
@@ -261,6 +276,8 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
             shipUpgrades.SetActive(false);
             moonUpgrades.SetActive(false);
+            marsUpgrades.SetActive(true);
+
 
             changeButton.SetActive(false);
         }
@@ -274,6 +291,8 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
             shipUpgrades.SetActive(true);
             moonUpgrades.SetActive(false);
+
+            backButton.SetActive(false);
         }
         else if(storeWeb == 3)
         {
@@ -281,6 +300,8 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
             shipUpgrades.SetActive(false);
             moonUpgrades.SetActive(true);
+            marsUpgrades.SetActive(false);
+            changeButton.SetActive(true);
         }
     }
 }

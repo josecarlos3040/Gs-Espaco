@@ -44,11 +44,29 @@ public class PlayerFuel : MonoBehaviour
             inSateliteOrbit = true;
             fuelSlider.value = maxFuel;
         }
+        if (playerMove.fuelMoonComplete && other.CompareTag("Moon"))
+        {
+            inSateliteOrbit = true;
+            fuelSlider.value = maxFuel;
+        }
+        if (playerMove.fuelMarsComplete && other.CompareTag("Mars"))
+        {
+            inSateliteOrbit = true;
+            fuelSlider.value = maxFuel;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Satelite"))
+        {
+            inSateliteOrbit = false;
+        }
+        if (other.CompareTag("Moon"))
+        {
+            inSateliteOrbit = false;
+        }
+        if (other.CompareTag("Mars"))
         {
             inSateliteOrbit = false;
         }

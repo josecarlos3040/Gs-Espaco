@@ -92,11 +92,12 @@ public class UIPlanetSlider : MonoBehaviour
                 {
                     playerMove.scannedMoon = true;
 
-                    if(!playerMove.sellMoonComplete && !playerMove.fuelMoonComplete)
+                    if(!playerMove.sellMoonComplete || !playerMove.fuelMoonComplete)
                     {
                         buttonsManager.goBackText.gameObject.SetActive(true);
                     }
-                    
+
+
                     if (storeManager.moonFuelMax)
                     {
                         playerMove.fuelMoonComplete = true;
@@ -105,7 +106,7 @@ public class UIPlanetSlider : MonoBehaviour
                         
                     }
 
-                    else { return; }
+                    
 
                     if (storeManager.moonSellMax)
                     {
@@ -114,11 +115,59 @@ public class UIPlanetSlider : MonoBehaviour
                         storeManager.fuelMoonButton.interactable = true;
                         
                     }
-                    else { return; }
+
+
+                    if (playerMove.sellMoonComplete && playerMove.fuelMoonComplete)
+                    {
+                        buttonsManager.goToMars.gameObject.SetActive(true);
+                    }
                     
                 }
-                
+
+                if (planet.CompareTag("Mars"))
+                {
+                    playerMove.scannedMars = true;
+
+                    if (!playerMove.sellMarsComplete && !playerMove.fuelMarsComplete)
+                    {
+                        buttonsManager.goBackText.gameObject.SetActive(true);
+                    }
+
+                    if (storeManager.marsFuelMax)
+                    {
+                        playerMove.fuelMarsComplete = true;
+                        storeManager.marsFuelMax = false;
+                        storeManager.sellMarsButton.interactable = true;
+
+                    }
+
+                    
+
+                    if (storeManager.marsSellMax)
+                    {
+                        playerMove.sellMarsComplete = true;
+                        storeManager.marsSellMax = false;
+                        storeManager.fuelMarsButton.interactable = true;
+
+                    }
+                    
+
+                    if (storeManager.marsColonyMax)
+                    {
+                        playerMove.finalMarsComplete = true;
+                    }
+                    
+
+                }
+
                 if (planet.CompareTag("Moon"))
+                {
+
+                    HidePreview();
+                    return;
+                }
+
+                if (planet.CompareTag("Mars"))
                 {
 
                     HidePreview();
@@ -185,7 +234,7 @@ public class UIPlanetSlider : MonoBehaviour
         if(planet.CompareTag("Moon") && storeManager.moonFuelMax)
         {
             currentPreview.SetActive(true);
-            currentPreview.transform.localPosition = new Vector3(0.002930165f, -0.233058f, 3.794358f);
+            currentPreview.transform.localPosition = new Vector3(0, 0, -4.76000023f);
 
             currentPreview.transform.localRotation = Quaternion.Euler(-130.264f, 0f, 0f);
 
@@ -206,15 +255,43 @@ public class UIPlanetSlider : MonoBehaviour
 
         else if (planet.CompareTag("Moon"))
         {
-            currentPreview.transform.localPosition = new Vector3(0, 0, 20);
+            currentPreview.transform.localPosition = new Vector3(-4.61852778e-13f, 0, 23.7500076f);
         }
-        else
+
+        if (planet.CompareTag("Mars") && storeManager.marsFuelMax)
+        {
+            currentPreview.SetActive(true);
+            currentPreview.transform.localPosition = new Vector3(0, 0, -4.76000023f);
+
+            currentPreview.transform.localRotation = Quaternion.Euler(-130.264f, 0f, 0f);
+
+            currentPreview.transform.localScale = new Vector3(90.95363f, 90.95363f, 90.95363f);
+            ResetChildrenTransforms(currentPreview.transform);
+        }
+        else if (planet.CompareTag("Mars") && storeManager.marsSellMax)
+        {
+            currentPreview.SetActive(true);
+
+            currentPreview.transform.localPosition = new Vector3(0.0633983f, -0.6686959f, -15.7071f);
+
+            currentPreview.transform.localRotation = Quaternion.Euler(-132.003f, -0.7269897f, 92.685f);
+
+            currentPreview.transform.localScale = new Vector3(51.01642f, 51.01642f, 51.01642f);
+            ResetChildrenTransforms(currentPreview.transform);
+        }
+
+        else if (planet.CompareTag("Mars"))
+        {
+            currentPreview.transform.localPosition = new Vector3(-4.61852778e-13f, 0, 23.7500076f);
+        }
+
+        else if(planet.CompareTag("Planet"))
         {
             currentPreview.transform.localPosition = new Vector3(0, 0, -15);
         }
     }
 
-    void ResetChildrenTransforms(Transform parent)
+    void ResetChildrenTransforms(Transform parent) 
     {
         foreach (Transform child in parent)
         {

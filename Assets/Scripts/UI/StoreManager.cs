@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,9 +18,15 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] Button scanButton;
     [SerializeField] Button rewardMultButton;
     [SerializeField] Button inventoryButton;
+    [SerializeField] Button colonyMars;
+
+
 
     public Button fuelMoonButton;
     public Button sellMoonButton;
+
+    public Button fuelMarsButton;
+    public Button sellMarsButton;
 
     [Header("Buy Prices")]
     [SerializeField] float speedPrice;
@@ -31,6 +38,24 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] float moonFuelPrice;
     [SerializeField] float moonSellPrice;
 
+    [SerializeField] float marsFuelPrice;
+    [SerializeField] float marsSellPrice;
+    [SerializeField] float marsColonyPrice;
+
+    [SerializeField] TextMeshProUGUI speedPriceText;
+    [SerializeField] TextMeshProUGUI fuelPriceText;
+    [SerializeField] TextMeshProUGUI scanSpeedText;
+    [SerializeField] TextMeshProUGUI rewardMultText;
+    [SerializeField] TextMeshProUGUI inventoryText;
+
+    [SerializeField] TextMeshProUGUI moonFuelText;
+    [SerializeField] TextMeshProUGUI moonSellText;
+
+    [SerializeField] TextMeshProUGUI marsFuelText;
+    [SerializeField] TextMeshProUGUI marsSellText;
+    [SerializeField] TextMeshProUGUI marsColonyText;
+
+
     [Header("Max Upgrades")]
     [SerializeField] float speedMax = 3;
     [SerializeField] float fuelMax = 3;
@@ -40,6 +65,10 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public bool moonFuelMax = false;
     public bool moonSellMax = false;
+
+    public bool marsFuelMax = false;
+    public bool marsSellMax = false;
+    public bool marsColonyMax = false;
 
     [Header("Actual Upgrades")]
     [SerializeField] float speedActual = 1;
@@ -59,10 +88,27 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
+    private void Start()
+    {
+        colonyMars.gameObject.SetActive(false);
+    }
     void Update()
     {
+        speedPriceText.text = "$"+speedPrice.ToString("F2");
+        fuelPriceText.text = "$" + fuelPrice.ToString("F2");
+        scanSpeedText.text = "$" + scanSpeedPrice.ToString("F2");
+        rewardMultText.text = "$" + rewardMultPrice.ToString("F2");
+        inventoryText.text = "$" + inventoryPrice.ToString("F2");
+        moonFuelText.text = "$" + moonFuelPrice.ToString("F2");
+        moonSellText.text = "$" + moonSellPrice.ToString("F2");
+        marsFuelText.text = "$" + marsFuelPrice.ToString("F2");
+        marsSellText.text = "$" + marsSellPrice.ToString("F2");
+        marsColonyText.text = "$" + marsColonyPrice.ToString("F2");
 
-        if(speedActual >= speedMax)
+
+
+
+        if (speedActual >= speedMax)
         {
             speedButton.interactable = false;
         }
@@ -98,6 +144,28 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (playerMove.sellMoonComplete)
         {
             sellMoonButton.interactable = false;
+        }
+
+        if (marsFuelMax)
+        {
+            fuelMarsButton.interactable = false;
+        }
+        if (marsSellMax)
+        {
+            sellMarsButton.interactable = false;
+        }
+        if (playerMove.fuelMarsComplete)
+        {
+            fuelMarsButton.interactable = false;
+        }
+        if (playerMove.sellMarsComplete)
+        {
+            sellMarsButton.interactable = false;
+        }
+
+        if(playerMove.fuelMarsComplete && playerMove.sellMarsComplete)
+        {
+            colonyMars.gameObject.SetActive(true);
         }
     }
     public void Speed()
@@ -168,6 +236,35 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             playerUpgrades.money -= moonFuelPrice;
             moonSellMax = true;
             fuelMoonButton.interactable = false;
+        }
+    }
+
+    public void FuelMars()
+    {
+        if (playerUpgrades.money >= marsFuelPrice)
+        {
+            playerUpgrades.money -= marsFuelPrice;
+            marsFuelMax = true;
+            sellMarsButton.interactable = false;
+        }
+    }
+    public void SeelMars()
+    {
+        if (playerUpgrades.money >= marsFuelPrice)
+        {
+            playerUpgrades.money -= marsFuelPrice;
+            marsSellMax = true;
+            fuelMarsButton.interactable = false;
+        }
+    }
+
+    public void ColonyMars()
+    {
+        if (playerUpgrades.money >= marsColonyPrice)
+        {
+            playerUpgrades.money -= marsColonyPrice;
+            marsColonyMax = true;
+            colonyMars.interactable = false;
         }
     }
 }

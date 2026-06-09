@@ -10,6 +10,7 @@ TagManager:
   - SpaceBarrer
   - Moon
   - Satelite
+  - Mars
   layers:
   - Default
   - TransparentFX
