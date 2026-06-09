@@ -142,6 +142,8 @@ public class PlayerMove : MonoBehaviour
 
         if (other.CompareTag("Satelite"))
         {
+            Instantiate(LockInPrefab, transform.position, transform.rotation);
+            buttonsManager.gameOverButton.SetActive(true);
             Satelite sat = other.GetComponentInParent<Satelite>();
 
             orbitCenter = sat.orbitCenter;
@@ -170,7 +172,7 @@ public class PlayerMove : MonoBehaviour
 
         if (other.CompareTag("Planet"))
         {
-            Instantiate(LockInPrefab, transform);
+            Instantiate(LockInPrefab, transform.position, transform.rotation);
             Planet planetScript = other.GetComponentInParent<Planet>();
 
             orbitCenter = planetScript.orbitCenter;
@@ -208,7 +210,7 @@ public class PlayerMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("Moon"))
         {
-            Instantiate(LockInPrefab, transform);
+            Instantiate(LockInPrefab, transform.position, transform.rotation);
             Planet planetScript = other.GetComponentInParent<Planet>();
 
             orbitCenter = planetScript.orbitCenter;
@@ -250,7 +252,7 @@ public class PlayerMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("Mars"))
         {
-            Instantiate(LockInPrefab, transform);
+            Instantiate(LockInPrefab, transform.position, transform.rotation);
             Planet planetScript = other.GetComponentInParent<Planet>();
 
             orbitCenter = planetScript.orbitCenter;
@@ -296,19 +298,23 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Moon"))
         {
-            Instantiate(LockOutPrefab, transform);
-            
+            Instantiate(LockOutPrefab, transform.position,transform.rotation);
+
             buttonsManager.sellButton.SetActive(false);
             buttonsManager.goToMars.gameObject.SetActive(false);
         }
         if (other.gameObject.CompareTag("Mars"))
         {
-            Instantiate(LockOutPrefab, transform);
+            Instantiate(LockOutPrefab, transform.position, transform.rotation);
             buttonsManager.finishGame.gameObject.SetActive(false);
         }
         if (other.gameObject.CompareTag("Planet"))
         {
-            Instantiate(LockOutPrefab, transform);
+            Instantiate(LockOutPrefab, transform.position, transform.rotation);
+        }
+        if (other.gameObject.CompareTag("Satelite"))
+        {
+            Instantiate(LockOutPrefab, transform.position, transform.rotation);
         }
     }
     void CheckBounds()

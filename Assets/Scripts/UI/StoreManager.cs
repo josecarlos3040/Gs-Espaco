@@ -214,7 +214,7 @@ public class StoreManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             playerUpgrades.money -= inventoryPrice;
             inventoryActual++;
-            playerUpgrades.maxInventory += 2;
+            playerUpgrades.maxInventory += 4;
         }
     }
 

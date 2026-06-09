@@ -28,7 +28,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] StoreManager storeManager;
 
     [SerializeField] GameObject startButton;
-    [SerializeField] GameObject gameOverButton;
+    [SerializeField] public GameObject gameOverButton;
     [SerializeField] GameObject particleLaunch;
 
     [SerializeField] TextMeshProUGUI moneyText;
