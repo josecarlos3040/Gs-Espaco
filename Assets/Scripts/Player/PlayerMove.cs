@@ -205,7 +205,7 @@ public class PlayerMove : MonoBehaviour
             playerFuel.fuelSlider.value = 0;
             rb.useGravity = false;
 
-            Instantiate(ExplosionPrefab, transform);
+            Instantiate(ExplosionPrefab, transform.position, transform.rotation);
             SoundManager.Instance.PlaySFX(SoundManager.Instance.explosion);
         }
 
