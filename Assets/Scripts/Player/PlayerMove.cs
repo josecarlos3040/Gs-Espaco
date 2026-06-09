@@ -304,6 +304,10 @@ public class PlayerMove : MonoBehaviour
         {
             Instantiate(LockOutPrefab, transform);
         }
+        if (other.gameObject.CompareTag("Planet"))
+        {
+            Instantiate(LockOutPrefab, transform);
+        }
     }
     void CheckBounds()
     {
