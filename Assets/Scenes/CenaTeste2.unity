@@ -34461,7 +34461,7 @@ MonoBehaviour:
   marsColonyPrice: 150
   speedPriceText: {fileID: 877260652}
   fuelPriceText: {fileID: 528030085}
-  scanSpeedText: {fileID: 134169719}
+  scanSpeedText: {fileID: 1266991476}
   rewardMultText: {fileID: 1629602346}
   inventoryText: {fileID: 1256996602}
   moonFuelText: {fileID: 95039611}

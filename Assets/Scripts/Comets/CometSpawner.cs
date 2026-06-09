@@ -38,6 +38,7 @@ public class CometSpawner : MonoBehaviour
     public void SpawnComets()
     {
         attempts = 0;
+        int secondPrefabCount = 0;
 
         while (spawnedPositions.Count < cometAmount && attempts < 1000)
         {
@@ -63,8 +64,25 @@ public class CometSpawner : MonoBehaviour
             if (!validPosition)
                 continue;
 
-            GameObject randomComet =
-                cometPrefabs[Random.Range(0, cometPrefabs.Length)];
+            int randomIndex;
+            if (secondPrefabCount >= 3)
+            {
+                do
+                {
+                    randomIndex = Random.Range(0, cometPrefabs.Length);
+                }
+                while (randomIndex == 1);
+            }
+            else
+            {
+                randomIndex = Random.Range(0, cometPrefabs.Length);
+            }
+
+            GameObject randomComet = cometPrefabs[randomIndex];
+
+            if (randomIndex == 1)
+                secondPrefabCount++;
+
             Instantiate(randomComet, spawnPos, Quaternion.identity, transform);
 
             spawnedPositions.Add(spawnPos);
