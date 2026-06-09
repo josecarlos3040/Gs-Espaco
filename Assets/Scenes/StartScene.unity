@@ -345,6 +345,104 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45185353}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &75862062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 75862066}
+  - component: {fileID: 75862065}
+  - component: {fileID: 75862064}
+  - component: {fileID: 75862063}
+  m_Layer: 5
+  m_Name: TelaTransicao
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &75862063
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75862062}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf135de50b8c412459eb970d13307329, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &75862064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75862062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1571265961, guid: 0d5efae326a5f55498c63c199b229da6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &75862065
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75862062}
+  m_CullTransparentMesh: 1
+--- !u!224 &75862066
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75862062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5.9924, y: 5.9924, z: 5.9924}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1350460283}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 320.5565, y: 180}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &86906440
 GameObject:
   m_ObjectHideFlags: 0
@@ -7580,101 +7678,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!1 &516907649
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 516907650}
-  - component: {fileID: 516907653}
-  - component: {fileID: 516907652}
-  - component: {fileID: 516907651}
-  m_Layer: 5
-  m_Name: TelaTransicao
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &516907650
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516907649}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 19.7, y: 10.92, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1350460283}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &516907651
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516907649}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cf135de50b8c412459eb970d13307329, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &516907652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516907649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.018006897, b: 0.10943389, a: 0}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 0}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!222 &516907653
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516907649}
-  m_CullTransparentMesh: 1
 --- !u!1 &561443764
 GameObject:
   m_ObjectHideFlags: 0
@@ -14474,6 +14477,7 @@ MonoBehaviour:
   maxFuel: 50
   inGame: 0
   gameOver: 0
+  inSateliteOrbit: 0
   playerMove: {fileID: 1211809210}
   fuelSlider: {fileID: 0}
 --- !u!114 &1211809210
@@ -14495,6 +14499,7 @@ MonoBehaviour:
   rb: {fileID: 1211809208}
   planet: {fileID: 0}
   orbitCenter: {fileID: 0}
+  orbitCenterSatel: {fileID: 0}
   orbitPivot: {fileID: 1715783279}
   playerFuel: {fileID: 1211809209}
   storeManager: {fileID: 0}
@@ -14504,6 +14509,7 @@ MonoBehaviour:
   passedCloud: 0
   fuelMoonComplete: 0
   sellMoonComplete: 0
+  scannedMoon: 0
 --- !u!1 &1212450466
 GameObject:
   m_ObjectHideFlags: 0
@@ -25269,6 +25275,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonsManager
   moneyReward: 5
+  qtdDays: 0
+  textMeshDay: {fileID: 0}
+  textInventory: {fileID: 0}
   barrerShip: {fileID: 2129798218}
   barrerCamera: {fileID: 1807708221}
   earthSkybox: {fileID: 2100000, guid: e9616b171e49e7e42af0cda42eaee93e, type: 2}
@@ -25282,8 +25291,15 @@ MonoBehaviour:
   scanner: {fileID: 0}
   cometSpawner: {fileID: 0}
   sellButton: {fileID: 0}
+  storeWeb: 0
+  changeButton: {fileID: 0}
+  backButton: {fileID: 0}
   player: {fileID: 1211809204}
   inventoryUI: {fileID: 0}
+  store: {fileID: 0}
+  storeButton: {fileID: 0}
+  shipUpgrades: {fileID: 0}
+  moonUpgrades: {fileID: 0}
   cineCamera: {fileID: 0}
   dolly: {fileID: 0}
 --- !u!114 &1350460280
@@ -25367,7 +25383,7 @@ RectTransform:
   - {fileID: 1697567409}
   - {fileID: 762166442}
   - {fileID: 1083045979}
-  - {fileID: 516907650}
+  - {fileID: 75862066}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -25387,8 +25403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1bad6063709bcd4fb877b14ef9a1702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneManager_Script
-  TempoTransicao: 3
-  TelaTransicao: {fileID: 516907651}
+  TempoTransicao: 1.5
+  TelaTransicao: {fileID: 75862063}
 --- !u!1 &1411995971
 GameObject:
   m_ObjectHideFlags: 0
