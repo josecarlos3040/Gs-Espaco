@@ -39,6 +39,12 @@ public class PlayerMove : MonoBehaviour
 
     public bool scannedMoon = false;
 
+    [Header("VFX")]
+    [SerializeField] GameObject LockInPrefab;
+    [SerializeField] GameObject LockOutPrefab;
+    [SerializeField] GameObject LockOutFirePrefab;
+    [SerializeField] GameObject ExplosionPrefab;
+
     //--------------
     public bool fuelMarsComplete = false;
     public bool sellMarsComplete = false;
