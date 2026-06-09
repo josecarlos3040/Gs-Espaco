@@ -288,6 +288,7 @@ public class PlayerMove : MonoBehaviour
         if (other.gameObject.CompareTag("InitialSpeed"))
         {
             passedCloud = true;
+            buttonsManager.startFrame.SetActive(false);
         }
     }
 
@@ -303,6 +304,7 @@ public class PlayerMove : MonoBehaviour
         if (other.gameObject.CompareTag("Mars"))
         {
             Instantiate(LockOutPrefab, transform);
+            buttonsManager.finishGame.gameObject.SetActive(false);
         }
         if (other.gameObject.CompareTag("Planet"))
         {

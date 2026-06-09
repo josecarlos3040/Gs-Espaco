@@ -155,6 +155,7 @@ public class UIPlanetSlider : MonoBehaviour
                     if (storeManager.marsColonyMax)
                     {
                         playerMove.finalMarsComplete = true;
+                        buttonsManager.finishGame.gameObject.SetActive(true);
                     }
                     
 
@@ -256,6 +257,8 @@ public class UIPlanetSlider : MonoBehaviour
         else if (planet.CompareTag("Moon"))
         {
             currentPreview.transform.localPosition = new Vector3(-4.61852778e-13f, 0, 23.7500076f);
+
+            
         }
 
         if (planet.CompareTag("Mars") && storeManager.marsFuelMax)
@@ -283,6 +286,8 @@ public class UIPlanetSlider : MonoBehaviour
         else if (planet.CompareTag("Mars"))
         {
             currentPreview.transform.localPosition = new Vector3(-4.61852778e-13f, 0, 23.7500076f);
+
+            currentPreview.transform.localScale = new Vector3(25.4022694f, 25.4022694f, 25.4022694f);
         }
 
         else if(planet.CompareTag("Planet"))

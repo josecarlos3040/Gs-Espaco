@@ -16,6 +16,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     [SerializeField] public TextMeshProUGUI goBackText;
     [SerializeField] public TextMeshProUGUI goToMars;
+    [SerializeField] public TextMeshProUGUI finishGame;
 
     [SerializeField] BarrerShip barrerShip;
     [SerializeField] BarrerCamera barrerCamera;
@@ -52,6 +53,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] public GameObject statsPanel;
     [SerializeField] public GameObject inventoryPanel;
     [SerializeField] public GameObject quests;
+    [SerializeField] public GameObject startFrame;
 
     [SerializeField] GameObject cineCamera;
     [SerializeField] CinemachineSplineDolly dolly;
@@ -60,6 +62,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] TextMeshProUGUI statsSpeedText;
     [SerializeField] TextMeshProUGUI statsScanerText;
     [SerializeField] TextMeshProUGUI statsMoneyText;
+    [SerializeField] TextMeshProUGUI statsFuelText;
 
     [SerializeField] Texture2D handCursor;
 
@@ -140,6 +143,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
         statsSpeedText.text = "Speed: " + playerMove.speed.ToString();
         statsScanerText.text = "Scaner: " + storeManager.scanSpeedActual.ToString();
         statsMoneyText.text = "Money Mult: " + moneyReward.ToString();
+        statsFuelText.text = "Max Fuel: " + playerFuel.maxFuel.ToString();
 
 
         if(playerMove.fuelMoonComplete && playerMove.sellMoonComplete)
@@ -181,6 +185,9 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         playerFuel.inGame = false;
         playerFuel.gameOver = false;
+        spaceCamera.MoveToInitialPosition();
+
+        startFrame.SetActive(true);
 
         var auto = dolly.AutomaticDolly;
         player.transform.position = new Vector3(-5.0314002f, 10.1700001f, 135.429993f);
@@ -195,7 +202,7 @@ public class UIButtonsManager : MonoBehaviour, IPointerEnterHandler, IPointerExi
         inventoryPanel.SetActive(true);
 
         goBackText.gameObject.SetActive(false);
-        spaceCamera.MoveToInitialPosition();
+        
         barrerCamera.cameraSpace.SetActive(false);
         barrerCamera.cameraDolly.SetActive(true);
 
